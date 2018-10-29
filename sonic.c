@@ -74,7 +74,6 @@ static void scaleSamples(
 {
     int fixedPointVolume = volume*4096.0f;
     int value;
-
     while(numSamples--) {
 		value = (*samples*fixedPointVolume) >> 12;
 		if(value > 32767) {
@@ -82,6 +81,7 @@ static void scaleSamples(
 		} else if(value < -32767) {
 	    	value = -32767;
 		}
+		/**号和++属于同一优先级，且方向都是从右向左的，所以这里先执行++，再取*，由于是后置++，所以*samples++这里取的还是samples的值，然后sample指针++*/
 		*samples++ = value;
     }
 }
